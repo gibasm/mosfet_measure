@@ -29,3 +29,17 @@ cmake ..
 
 make -j`nproc`
 ```
+
+``` 
+./fetmes --multimeter=<ip of your multimeter> -mmport=<port used by your multimeter> \
+--powersupply-serial=<path to the powersupply serial devicee (e.g. /dev/ttACM0)> \ 
+--pwbaudrate=<power supply serial baudrate 9600/115200>
+``` 
+
+Alternatively if your power supply uses TCP, you may use `--powersuppy=<ip> --psport=<port>` and vice versa.
+There's also help list if you have any doubts:
+
+```
+./fetmes --help
+```
+

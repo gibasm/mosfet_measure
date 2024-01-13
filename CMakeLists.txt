@@ -10,6 +10,8 @@ set(SOURCE_FILES
     src/main.c
     src/serial.c
     src/tcp.c
+    src/cmds.c
+    src/ring_buffer.c
 )
 
 add_executable(${TARGET_NAME} ${SOURCE_FILES})

@@ -43,3 +43,6 @@ There's also help list if you have any doubts:
 ./fetmes --help
 ```
 
+## API
+
+See: src/cmds.h

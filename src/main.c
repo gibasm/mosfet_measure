@@ -95,7 +95,6 @@ static void print_recvd_chars()
         putchar(c);
     while(rb_pop(&ps_rb, &c) != -1) 
         putchar(c);
-    putchar('\n');
 }
 
 int main(int argc, char** argv) 
@@ -130,16 +129,10 @@ int main(int argc, char** argv)
     if(pthread_create(&ps_recvt, NULL, receiver_thread, (void*)&ps_recvt_args) == -1)
         goto pthread_fail;
     
-    float voltage = 0.0f;
-    float current = 0.5f;
-
-    
-
     for(int i = 0; i < 20; ++i)
     {
-        SET_VOLT(voltage);
+        MEAS_VOLT_DC_RANGE("200mV");
         sleep(1);
-        voltage += 0.1f;
         print_recvd_chars(); 
     }
     
@@ -248,6 +241,13 @@ static void* receiver_thread(void* arg)
 
     int fd = ((struct recvt_args*)arg)->fd;
     struct ring_buffer_t* rb = ((struct recvt_args*)arg)->rb;
+
+    char c;
+    while(1) {
+        if(read(fd, &c, 1) != -1) {
+            rb_push(rb, c); 
+        }
+    }
 
     return NULL;
 }

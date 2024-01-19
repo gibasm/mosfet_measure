@@ -53,6 +53,8 @@ int rb_push(struct ring_buffer_t* rb, char c)
     if(rb->wpos == rb->rpos)
         rb->isfull = 1;
 
+    sem_post(&rb->sem);
+
     pthread_mutex_unlock(&rb->lock);
 
     return 0;
